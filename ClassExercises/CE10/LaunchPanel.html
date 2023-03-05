@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Launch Panel</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+
+
+
+    </head>
+    <body>
+        <div id = "panel">
+            <div id="engineCoolant" class="item1">
+                <h3>Engine Coolant</h3>
+                <div class="" id = "coolantLevels"></div>
+                <input type="radio" value="On" id = "coolantOn" name ="engineCoolant" onclick="checkCoolant()" checked>
+                <label for="coolantOn">On</label>
+                <input type="radio" value="Off" id="coolantOff" name ="engineCoolant" onclick="checkCoolant()">
+                <label for="coolantOff">Off</label>
+            </div>
+
+            <div id = "launchInput" class="item2">
+                <input type="text" id="launchCode" name="launchCode">
+                <label for="launchCode">Launch Code</label>
+            </div>
+
+            <div id = "fuelBurnTime" class="item3">
+                <input type="number" id = "burnTime" name="burnTime"><br>
+                <label for = "burnTime">Fuel Burn Time (1-100%)</label>
+            </div>
+
+            <div class="item4">
+                <button id = "launchButton" onclick="checkToLaunch()">Launch</button>
+            </div>
+
+            <div class="item5">
+                <div id = "countDownDisplay"></div>
+                <h3>Countdown</h3>
+
+            </div>
+
+            <div class="item6">
+                <ul id="status">
+
+                </ul>
+            </div>
+        </div>
+        <div id="rocketShip">
+            <img src="rocket.png" alt="rocket">
+        </div>
+
+    </body>
+
+    <script>
+
+        //set coolant display
+        function checkCoolant()
+        {
+            var coolantDisplay = document.getElementById("coolantLevels");
+
+        if (document.getElementById("coolantOn").checked)
+        {
+             coolantDisplay.classList.remove("goodCoolant");
+            coolantDisplay.classList.add("tooMuchCoolant");
+            console.log("on");
+            
+        }
+        if (document.getElementById("coolantOff").checked)
+        {
+            coolantDisplay.classList.add("goodCoolant");
+            coolantDisplay.classList.remove("tooMuchCoolant");
+            console.log("off");
+
+        }
+        }
+        
+
+        function checkToLaunch()
+        {
+
+            statusIndicator = document.getElementById("status");
+            statusInformation = "";
+            readyToLaunch = true;
+            var launchCodeInput = document.getElementById("launchCode").value;
+            console.log(launchCodeInput);
+            
+            var launchcode = document.getElementById("launchCode").value;
+
+            try
+            {
+                if (document.getElementById("coolantOn").checked)
+                {
+                    statusInformation += "<li>To much coolant to start engine</li>";
+                    readyToLaunch = false;
+
+                }
+
+                if (document.getElementById("burnTime").value < 20)
+                {
+                    statusInformation += "<li>Burn time too low</li>";
+                    readyToLaunch = false;
+
+
+                } else if (document.getElementById("burnTime").value > 30)
+                {
+                    statusInformation += "<li>Burn time too high</li>";
+                    readyToLaunch = false;
+                }
+
+                if (document.getElementById("launchCode").value === "")
+                {
+                    statusInformation += "<li>Need launch code</li>";
+  
+                    readyToLaunch = false;
+                }
+
+                //launch if good
+                if (readyToLaunch)
+                {
+           
+                    var num = 10;
+
+                    var interval = setInterval(setCountdown, 1000);
+                    
+                   
+                    
+                    
+
+                }
+
+
+                statusIndicator.innerHTML = statusInformation;
+            } catch (err)
+            {
+                console.log(err);
+
+            }
+
+            function setCountdown()
+            {
+                document.getElementById("countDownDisplay").innerHTML = num;
+                num--;
+                if (num === -1)
+                {
+                    clearInterval(interval);
+                    document.getElementById("status").innerHTML = "<li style ='font-size: 3em;'>"+launchCodeInput+" Launched</li>";
+                }
+
+
+
+
+            }
+
+            /* comment 
+             Check to see if the engine coolant is checked as off
+             It will check to see the burn is between 20% and 30%
+             It will check to see if there is a launch code entered
+             If any errors come up it will stop and list the error
+             If no errors it will display the launch code in all uppercase and count down to launch with a loop
+             
+             */
+        }
+    </script>
+
+
+</html>
+
+

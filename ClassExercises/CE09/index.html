@@ -1,0 +1,140 @@
+
+<html>   
+    <head>
+        <title>Form Validation</title>
+
+        <style>
+            .error
+            {
+                color:red;
+                
+            }
+
+          
+
+        </style>
+
+        <script>
+
+
+            function validate()
+            {
+                var errorArray = new Array();
+
+                if (document.myForm.Name.value === "")
+                {
+                    document.myForm.Name.focus(); //puts cursor in that are of the form
+                    errorArray.push("You need a Name");
+                    document.getElementById("Name").style = "background-color:#f7df85";
+
+
+                } else
+                {
+                    document.getElementById("Name").style = "background-color:white";
+
+                }
+
+                if (document.myForm.EMail.value === "")
+                {
+                    document.myForm.EMail.focus();
+                    errorArray.push("You need an Email");
+                    document.getElementById("EMail").style = "background-color:#f7df85";
+
+                } else
+                {
+                    document.getElementById("EMail").style = "background-color:white";
+
+                }
+
+                if (document.myForm.Zip.value === "" ||
+                        isNaN(document.myForm.Zip.value) ||
+                        document.myForm.Zip.value.length !== 5)  // isNaN is is not a number
+                {
+                    document.myForm.Zip.focus();
+                    errorArray.push("You need a zip code");
+                    document.getElementById("Zip").style = "background-color:#f7df85";
+                } else
+                {
+                    document.getElementById("Zip").style = "background-color:white";
+
+                }
+
+                if (document.myForm.Country.value === "-1")
+                {
+                    errorArray.push("You need a country");
+                    document.getElementById("Country").style = "background-color:#f7df85";
+                } else
+                {
+                    document.getElementById("Country").style = "background-color:white";
+
+                }
+
+                if (errorArray.length > 0)
+                {
+                    var errorReport = document.getElementById("errorlog");
+                    errorString = "<ul style='margin: 0;'>";
+                    for (error = 0; error < errorArray.length; error++)
+                    {
+                        errorString = errorString + "<li class='error'>" + errorArray[error] + "</li>";
+                    }
+
+                    errorString += "</ul>";
+                    errorReport.innerHTML = errorString;
+                    return false;
+                }
+                return(true);
+            }
+
+
+        </script>      
+    </head>   
+    <body>
+        <div id="mainDiv">
+            <form action="" name="myForm" onsubmit="return(validate());">
+                <table cellspacing="2" cellpadding="2" border="1">            
+                    <tr>
+                        <td align="right">Name</td>
+                        <td><input type="text" name="Name" id="Name" /></td>
+                    </tr>            
+                    <tr>
+                        <td align="right">EMail</td>
+                        <td><input type="text" name="EMail" id="EMail" /></td>
+                    </tr>            
+                    <tr>
+                        <td align="right">Zip Code</td>
+                        <td><input type="text" name="Zip" id="Zip" /></td>
+                    </tr>            
+                    <tr>
+                        <td align="right">Country</td>
+                        <td>
+                            <select name="Country" id="Country">
+
+                            </select>
+                        </td>
+                    </tr>            
+                    <tr>
+                        <td align="right"></td>
+                        <td><input type="submit" value="Submit" /></td>
+                    </tr>            
+                </table>
+
+            </form>  
+            <div id="errorlog"></div>
+        </div>
+
+    </body>
+    <script>
+
+        var countryArray = ["USA", "UK", "INDIA"];
+        countryOption = "<option value='-1' selected>[choose yours]</option>";
+
+        for (c = 0; c < countryArray.length; c++)
+        {
+            countryOption += "<option value='" + c + "'>" + countryArray[c] + "</option>";
+
+        }
+
+        document.myForm.Country.innerHTML = countryOption;
+
+    </script>
+</html>

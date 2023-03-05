@@ -1,0 +1,112 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : Oct 28, 2022, 9:09:52 PM
+    Author     : erinn
+*/
+
+body{
+    display:flex;
+}
+
+.item1 {
+    grid-area: coolant;
+}
+.item2 {
+    grid-area: code;
+}
+.item3 {
+    grid-area: fuel;
+}
+.item4 {
+    grid-area: launch;
+}
+.item5{
+    grid-area: countdown;
+}
+
+.item6{
+    grid-area: message;
+}
+
+
+#panel
+{
+    display:grid;
+    grid-template-areas:
+        'coolant code code fuel'
+        'coolant launch launch countdown'
+    'message message message message';
+    
+    width: 60%;
+    background-color: #2d283a;
+    color: #47af44;
+    font-weight: bold;
+    font-family: system-ui;
+    padding:50px;
+    gap: 10px 50px;
+
+
+}
+
+#coolantLevels{
+    height: 100px;
+    width: 75px;
+    background-color: #00add7;
+    margin-left: 25px;
+}
+
+.tooMuchCoolant
+{
+    background-color: #00add7;
+    
+}
+
+#rocketShip img{
+    height: 100px;
+}
+
+.goodCoolant
+{
+    background-image: linear-gradient(black , red);
+}
+
+#launchCode
+{
+    width: 75%;
+    height: 50px;
+    text-align: center;
+    font-size: 1.75em;
+}
+
+
+#launchInput label
+{
+    display: inline-block;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+#launchButton
+{
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    font-size: 2em;
+}
+#burnTime
+{
+    width: 75%;
+height: 25%;
+}
+
+#countDownDisplay{
+    background-color:darkgray;
+    width: 35%;
+    height: 86%;
+    margin: auto;
+    text-align: center;
+    font-size:3em;
+}
